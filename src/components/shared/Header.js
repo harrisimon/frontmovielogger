@@ -2,6 +2,9 @@ import React, { Fragment, useState } from "react"
 
 import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
+import Container from "react-bootstrap/Container"
+import { LinkContainer } from "react-router-bootstrap"
+
 import { Link } from "react-router-dom"
 const linkStyle = {
 	color: "white",
@@ -9,64 +12,62 @@ const linkStyle = {
 }
 const authenticatedOptions = (
 	<>
-		<Nav.Item>
-			<Link to="/change-password" style={linkStyle}>
+			<LinkContainer to="/change-password" style={linkStyle}>
+		<Nav.Link>
 				Change Password
-			</Link>
-		</Nav.Item>
-		<Nav.Item>
-			<Link to="/sign-out" style={linkStyle}>
+		</Nav.Link>
+			</LinkContainer>
+			<LinkContainer to="/sign-out" style={linkStyle}>
+		<Nav.Link>
 				Sign Out
-			</Link>
-		</Nav.Item>
+		</Nav.Link>
+			</LinkContainer>
 	</>
 )
 
 const unauthenticatedOptions = (
 	<>
-		<Nav.Item>
-			<Link to="/sign-up" style={linkStyle}>
-				Sign Up
-			</Link>
-		</Nav.Item>
-		<Nav.Item>
-			<Link to="/sign-in" style={linkStyle}>
-				Sign In
-			</Link>
-		</Nav.Item>
+		<LinkContainer to="/sign-up" style={linkStyle}>
+			<Nav.Link>Sign Up</Nav.Link>
+		</LinkContainer>
+		<LinkContainer to="/sign-in" style={linkStyle}>
+			<Nav.Link>Sign In</Nav.Link>
+		</LinkContainer>
 	</>
 )
 
 const alwaysOptions = (
 	<>
-		<Nav.Item>
-			<Link to="/" style={linkStyle}>
-				Home
-			</Link>
-		</Nav.Item>
+		<LinkContainer to="/" style={linkStyle}>
+			<Nav.Link>My Page</Nav.Link>
+		</LinkContainer>
 	</>
 )
+
 
 const Header = ({ user }) => {
 	return (
 		<Navbar bg="dark" variant="dark" expand="md">
-			<Navbar.Brand>
-				<Link to="/" style={linkStyle}>
-					Movie Logger
-				</Link>
-			</Navbar.Brand>
-			<Navbar.Toggle aria-controls="basic-navbar-nav" />
-			<Navbar.Collapse id="basic-navbar-nav">
-				<Nav className="ml-auto">
-					{user && (
-						<span className="navbar-text mr-2">
-							Welcome, {user.email}
-						</span>
-					)}
-					{alwaysOptions}
-					{user ? authenticatedOptions : unauthenticatedOptions}
-				</Nav>
-			</Navbar.Collapse>
+			<Container>
+				<Navbar.Brand>
+					<Link to="/" style={linkStyle}>
+						Movie Logger
+					</Link>
+				</Navbar.Brand>
+				<Navbar.Toggle aria-controls="basic-navbar-nav" />
+				<Navbar.Collapse id="basic-navbar-nav">
+					<Nav className="ml-auto">
+						{user && (
+							<span className="navbar-text mr-2">
+								Welcome, {user.email}
+							</span>
+						)}
+
+						{alwaysOptions}
+						{user ? authenticatedOptions : unauthenticatedOptions}
+					</Nav>
+				</Navbar.Collapse>
+			</Container>
 		</Navbar>
 	)
 }

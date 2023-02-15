@@ -6,6 +6,9 @@ import Header from "./components/shared/Header"
 import RequireAuth from "./components/shared/RequireAuth"
 import SignIn from "./components/auth/SignIn"
 import Home from "./components/Home"
+import SignUp from "./components/auth/SignUp"
+import ChangePassword from "./components/auth/ChangePassword"
+import UserLogs from "./components/UserLogs"
 
 const App = () => {
 	const [user, setUser] = useState(null)
@@ -15,6 +18,7 @@ const App = () => {
 			<Header user={user} />
 			<Routes>
 				<Route path="/sign-in" element={<SignIn setUser={setUser} />} />
+                <Route path='/sign-up' element={<SignUp setUser={setUser} />}/>
 				<Route
 					path="/user"
 					element={
@@ -23,6 +27,22 @@ const App = () => {
 						</RequireAuth>
 					}
 				/>
+                <Route
+                    path="/change-password"
+                    element={
+                    <RequireAuth user={user}>
+                        <ChangePassword user={user} />
+                    </RequireAuth>
+                    }
+                />
+                <Route
+                    path="/my-logs"
+                    element={
+                    <RequireAuth user={user}>
+                        <UserLogs user={user} />
+                    </RequireAuth>
+                    }
+                />
 			</Routes>
 		</Fragment>
 	)

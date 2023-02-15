@@ -10,3 +10,13 @@ export const getLogs = (user) => {
 		},
     })
 }
+
+export const getMyLogs = (user) => {
+    return axios({
+        method: 'GET',
+        url: apiUrl + '/mine',
+        headers: {
+			Authorization: `Token token=${user.token}`,
+		},
+    })
+}
