@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, Fragment } from "react"
+import { Route, Routes } from "react-router"
+import { v4 as uuid } from "uuid"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Header from "./components/shared/Header"
+import RequireAuth from "./components/shared/RequireAuth"
+import SignIn from "./components/auth/SignIn"
+import Home from "./components/Home"
+
+const App = () => {
+	const [user, setUser] = useState(null)
+
+	return (
+		<Fragment>
+			<Header user={user} />
+			<Routes>
+				<Route path="/sign-in" element={<SignIn setUser={setUser} />} />
+				<Route
+					path="/user"
+					element={
+						<RequireAuth user={user}>
+							<Home user={user}  />
+						</RequireAuth>
+					}
+				/>
+			</Routes>
+		</Fragment>
+	)
 }
 
-export default App;
+export default App
