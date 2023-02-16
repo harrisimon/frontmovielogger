@@ -16,7 +16,7 @@ const authenticatedOptions = (
 		<LinkContainer to="/user" style={linkStyle}>
 			<Nav.Link>My Page</Nav.Link>
 		</LinkContainer>
-		<LinkContainer to="/add-log" style={linkStyle}>
+		<LinkContainer to="/search" style={linkStyle}>
 			<Nav.Link>Add Log</Nav.Link>
 		</LinkContainer>
 		<NavDropdown bg="dark" title="User" menuVariant="dark">

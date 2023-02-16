@@ -46,14 +46,17 @@ const App = () => {
 					}
 				/>
 				<Route
-					path="/add-log"
+					path="/search"
 					element={
 						<RequireAuth>
 							<AddLog user={user} />
 						</RequireAuth>
 					}
 				/>
-                
+                <Route
+                    path='/'
+                 />
+
 			</Routes>
 		</Fragment>
 	)

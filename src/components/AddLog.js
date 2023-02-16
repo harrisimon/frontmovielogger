@@ -6,6 +6,9 @@ import axios from "axios"
 const AddLog = () => {
 	const [query, setQuery] = useState("")
 	const [results, setResults] = useState(null)
+    const [searching, setSearching] = useState(true)
+    const [selection, setSelection] = useState(null)
+    const [log, setLog] = useState({})
 
 	const handleChange = (e) => {
 		setQuery(e.target.value)
@@ -17,10 +20,11 @@ const AddLog = () => {
 		)
 		// console.log(res.data)
 		setResults(res.data.Search)
+        setSearching(true)
 	}
+
 	let list
-	let group
-	if (results) {
+	if (results && searching) {
 		// add movie card and pagination
 		list = results.map((res) => {
 			return (
@@ -30,10 +34,26 @@ const AddLog = () => {
 					image={res.Poster}
 					releaseYear={res.Year}
 					imdbId={res.imdbID}
+                    onAdd={setSearching}
+                    onSelect={setSelection}
 				/>
 			)
 		})
 	}
+
+    if(selection){
+        const seachSelection = async (selection) => {
+            const res = await axios.get(`http://www.omdbapi.com/?apikey=764389f4&i&i=${selection}`)
+            console.log(res.data)
+            setLog(res)
+            setSelection(null)
+        }
+        seachSelection(selection) 
+    }
+
+    if(log){
+        
+    }
 
 	return (
 		<div>
