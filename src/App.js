@@ -10,6 +10,7 @@ import SignUp from "./components/auth/SignUp"
 import ChangePassword from "./components/auth/ChangePassword"
 import UserLogs from "./components/UserLogs"
 import AddLog from "./components/AddLog"
+import ReviewPage from "./components/ReviewPage"
 
 const App = () => {
 	const [user, setUser] = useState(null)
@@ -52,6 +53,7 @@ const App = () => {
 						</RequireAuth>
 					}
 				/>
+                
 			</Routes>
 		</Fragment>
 	)
