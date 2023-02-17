@@ -1,3 +1,4 @@
+import './index.css'
 import { useState, Fragment } from "react"
 import { Route, Routes } from "react-router"
 import { v4 as uuid } from "uuid"
@@ -48,7 +49,7 @@ const App = () => {
 				<Route
 					path="/search"
 					element={
-						<RequireAuth>
+						<RequireAuth user={user}>
 							<AddLog user={user} />
 						</RequireAuth>
 					}

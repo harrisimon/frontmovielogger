@@ -20,3 +20,15 @@ export const getMyLogs = (user) => {
 		},
     })
 }
+
+export const addLog = (user, review) => {
+    // console.log(log)
+    return axios({
+        method:'POST',
+        url: apiUrl + '/reviews',
+        data: {review},
+        headers: {
+			Authorization: `Token token=${user.token}`,
+		},
+    })
+}

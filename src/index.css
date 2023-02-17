@@ -1,0 +1,11 @@
+.card-left {
+    display: flex;
+	flex-direction: row;
+}
+.log-card-body{
+    display: flex;
+    flex-direction: column;
+}
+.card-left img {
+	width: 30%;
+}
