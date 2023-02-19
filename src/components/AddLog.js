@@ -34,7 +34,7 @@ const AddLog = (props) => {
 		const res = await axios.get(
 			`http://www.omdbapi.com/?apikey=764389f4&i&s=${query}`
 		)
-		console.log(res.data)
+		// console.log(res.data)
 		setReview("")
 		if (res.data.Response === "True") {
 			setResults(res.data)
@@ -42,6 +42,9 @@ const AddLog = (props) => {
 		} else if (res.data.Response === "False") {
 			// setResults(res.data)
 			setResults(res.data)
+			setSearching(true)
+			setSelection(false)
+			setLog(null)
 			// console.log(results)
 			// console.log('fail', res.data)
 		}
