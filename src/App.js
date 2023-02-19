@@ -1,4 +1,4 @@
-import './index.css'
+import "./index.css"
 import { useState, Fragment } from "react"
 import { Route, Routes } from "react-router"
 import { v4 as uuid } from "uuid"
@@ -12,6 +12,7 @@ import ChangePassword from "./components/auth/ChangePassword"
 import UserLogs from "./components/UserLogs"
 import AddLog from "./components/AddLog"
 import ReviewPage from "./components/ReviewPage"
+import ReviewDetail from "./components/ReviewDetail"
 
 const App = () => {
 	const [user, setUser] = useState(null)
@@ -54,10 +55,15 @@ const App = () => {
 						</RequireAuth>
 					}
 				/>
-                <Route
-                    path='/'
-                 />
-
+				<Route
+					path="/reviews/:id"
+					element={
+						<RequireAuth user={user}>
+							<ReviewDetail user={user} />
+						</RequireAuth>
+					}
+				/>
+				<Route path="/" />
 			</Routes>
 		</Fragment>
 	)

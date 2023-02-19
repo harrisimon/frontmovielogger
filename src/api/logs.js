@@ -1,34 +1,44 @@
-import apiUrl from "../apiConfig";
-import axios from "axios";
+import apiUrl from "../apiConfig"
+import axios from "axios"
 
 export const getLogs = (user) => {
-    return axios({
-        method: 'GET',
-        url: apiUrl + '/reviews',
-        headers: {
+	return axios({
+		method: "GET",
+		url: apiUrl + "/reviews",
+		headers: {
 			Authorization: `Token token=${user.token}`,
 		},
-    })
+	})
 }
 
 export const getMyLogs = (user) => {
-    return axios({
-        method: 'GET',
-        url: apiUrl + '/mine',
-        headers: {
+	return axios({
+		method: "GET",
+		url: apiUrl + "/mine",
+		headers: {
 			Authorization: `Token token=${user.token}`,
 		},
-    })
+	})
 }
 
 export const addLog = (user, review) => {
-    // console.log(log)
-    return axios({
-        method:'POST',
-        url: apiUrl + '/reviews',
-        data: {review},
-        headers: {
+	// console.log(log)
+	return axios({
+		method: "POST",
+		url: apiUrl + "/reviews",
+		data: { review },
+		headers: {
 			Authorization: `Token token=${user.token}`,
 		},
-    })
+	})
+}
+
+export const getLog = (user, id) => {
+	return axios({
+		method: "GET",
+		url: apiUrl + "/reviews/" + id,
+		headers: {
+			Authorization: `Token token=${user.token}`,
+		},
+	})
 }

@@ -7,11 +7,11 @@ const UserLogs = (props) => {
 
 	useEffect(() => {
 		getMyLogs(props.user).then((res) => {
-			setUserLogs(res.data.logs)
-			console.log("user logs", res.data.logs)
+			setUserLogs(res.data.logs.reverse())
+			// console.log("user logs", res.data.logs)
 		})
 	}, [])
-	console.log(userLogs)
+	// console.log(userLogs)
 	let renderedLogs
 	if (userLogs) {
 		renderedLogs = userLogs.map((log) => {

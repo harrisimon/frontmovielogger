@@ -26,7 +26,7 @@ const Home = (props) => {
     // },[])
 	let renderedLogs
 	if (logs) {
-		renderedLogs = logs.map((log) => {
+		renderedLogs = logs.reverse().map((log) => {
 			return (
 				<MovieCard
 					key={log._id}
@@ -35,6 +35,7 @@ const Home = (props) => {
 					image={log.poster}
 					title={log.movieTitle}
 					releaseYear={log.releaseYear}
+					id={log.id}
 				/>
 			)
 		})

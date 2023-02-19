@@ -34,28 +34,40 @@ const AddLog = (props) => {
 		const res = await axios.get(
 			`http://www.omdbapi.com/?apikey=764389f4&i&s=${query}`
 		)
-		// console.log(res.data)
+		console.log(res.data)
 		setReview("")
-		setResults(res.data.Search)
-		setSearching(true)
+		if (res.data.Response === "True") {
+			setResults(res.data)
+			setSearching(true)
+		} else if (res.data.Response === "False") {
+			// setResults(res.data)
+			setResults(res.data)
+			// console.log(results)
+			// console.log('fail', res.data)
+		}
 	}
 
 	let list
 	if (results && searching) {
 		// add movie card and pagination
-		list = results.map((res) => {
-			return (
-				<MovieCardSearch
-					key={res.imdbId}
-					title={res.Title}
-					image={res.Poster}
-					releaseYear={res.Year}
-					imdbId={res.imdbID}
-					onAdd={setSearching}
-					onSelect={setSelection}
-				/>
-			)
-		})
+		if (results.Response === "True") {
+			// console.log(results.Response)
+			list = results.Search.map((res, index) => {
+				return (
+					<MovieCardSearch
+						key={index}
+						title={res.Title}
+						image={res.Poster}
+						releaseYear={res.Year}
+						imdbId={res.imdbID}
+						onAdd={setSearching}
+						onSelect={setSelection}
+					/>
+				)
+			})
+		} else if (results.Response === "False") {
+			list = <div>{results.Error}</div>
+		}
 	}
 
 	if (selection) {
@@ -63,7 +75,7 @@ const AddLog = (props) => {
 			const res = await axios.get(
 				`http://www.omdbapi.com/?apikey=764389f4&i&i=${selection}`
 			)
-			// console.log(res.data)
+			console.log(res)
 			setLog(res.data)
 			setSelection(null)
 		}
