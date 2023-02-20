@@ -21,32 +21,21 @@ const AddLog = (props) => {
 	const handleReviewChange = (e) => {
 		setReview(e.target.value)
 	}
-	// const handleSubmitLog = (user, log, e) => {
-	//     // addLog(user)
-	//     //     .then()
-	//     e.preventDefault()
-	//     console.log(user)
-
-	// }
 
 	const searchQuery = async (query, e) => {
 		e.preventDefault()
 		const res = await axios.get(
 			`http://www.omdbapi.com/?apikey=764389f4&i&s=${query}`
 		)
-		// console.log(res.data)
 		setReview("")
 		if (res.data.Response === "True") {
 			setResults(res.data)
 			setSearching(true)
 		} else if (res.data.Response === "False") {
-			// setResults(res.data)
 			setResults(res.data)
 			setSearching(true)
 			setSelection(false)
 			setLog(null)
-			// console.log(results)
-			// console.log('fail', res.data)
 		}
 	}
 

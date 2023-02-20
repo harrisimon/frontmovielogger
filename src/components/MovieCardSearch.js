@@ -9,11 +9,11 @@ const MovieCardSearch = (props) => {
 		poster = <Card.Img variant="top" src={image} />
 	}
 
-    const handleNewEntry = (e) => {
-        e.preventDefault()
-        onSelect(imdbId)
-        onAdd(false)
-    }
+	const handleNewEntry = (e) => {
+		e.preventDefault()
+		onSelect(imdbId)
+		onAdd(false)
+	}
 
 	return (
 		<Card style={{ width: "18rem" }}>
@@ -22,15 +22,12 @@ const MovieCardSearch = (props) => {
 				<Card.Title>
 					{title}, {releaseYear}
 				</Card.Title>
-				<Card.Footer>
-					<Button
-						variant="primary"
-						onClick={handleNewEntry}
-					>
-						Add Review
-					</Button>
-				</Card.Footer>
 			</Card.Body>
+			<Card.Footer>
+				<Button variant="primary" onClick={handleNewEntry}>
+					More
+				</Button>
+			</Card.Footer>
 		</Card>
 	)
 }

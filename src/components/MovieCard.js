@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const MovieCard = (props) => {
     const {image, director, genre, title, releaseYear, id} = props
 
+    const genreList = genre.join(', ')
 
     return (
         <Card style={{ width: '18rem' }}>
@@ -16,17 +17,17 @@ const MovieCard = (props) => {
             <Card.Text>
                 Directed by: {director}
             </Card.Text>
+        </Card.Body>
             <Card.Footer>
                 <Card.Text>
-                Genre: {genre}
+                Genre: {genreList}
 
                 </Card.Text>
                 <Link to={`/reviews/${id}`}>
-							<Button primary>View Character</Button>
+							<Button primary>View Log</Button>
 						</Link>
-            <Button variant="primary">See Review</Button>
+            
             </Card.Footer>
-        </Card.Body>
         </Card>
     )
 }

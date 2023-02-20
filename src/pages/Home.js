@@ -1,29 +1,21 @@
 import { useEffect, useState } from "react"
 import { getLogs, getMyLogs } from "../api/logs"
 import Container from "react-bootstrap/Container"
-import MovieCard from "./MovieCard"
+import MovieCard from "../components/MovieCard"
 import { CardGroup, Col, Row, Pagination } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
 //look into pagination
 const Home = (props) => {
 	const [logs, setLogs] = useState(null)
-    
 
 	useEffect(() => {
 		getLogs(props.user).then((res) => {
 			setLogs(res.data.logs)
-			console.log("the res", res.data.logs)
+			// console.log("the res", res.data.logs)
 		})
+		
 	}, [])
-
-    // useEffect(()=> {
-    //     getMyLogs(props.user)
-    //         .then((res) => {
-    //             setUserLogs(res.data.logs)
-    //             console.log('user logs', res.data.logs)
-    //         })
-    // },[])
 	let renderedLogs
 	if (logs) {
 		renderedLogs = logs.reverse().map((log) => {
@@ -42,13 +34,12 @@ const Home = (props) => {
 	}
 	return (
 		<Container>
-			<Row>
-				<h1>Add Post</h1>
-			</Row>
+			the home page
+
 			{/* add link to add post */}
 			<Row>
 				<h1>My Posts</h1>
-                <Link to='/my-logs'>go</Link>
+				<Link to="/my-logs">go</Link>
 			</Row>
 			{/* add my posts */}
 			<Row>

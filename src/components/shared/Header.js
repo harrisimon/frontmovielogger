@@ -52,7 +52,7 @@ const Header = ({ user }) => {
 		<Navbar bg="dark" variant="dark" expand="md">
 			<Container>
 				<Navbar.Brand>
-					<Link to="/" style={linkStyle}>
+					<Link to="/user" style={linkStyle}>
 						Movie Logger
 					</Link>
 				</Navbar.Brand>
