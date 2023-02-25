@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react"
 import { Form, Container, Button, InputGroup, Row, Card } from "react-bootstrap"
-import MovieCardSearch from "./MovieCardSearch"
-import AddLogReviewCard from "./AddLogReviewCard"
+import MovieCardSearch from "../components/MovieCardSearch"
+import AddLogReviewCard from "../components/AddLogReviewCard"
 import { addLog } from "../api/logs"
 import axios from "axios"
 
 const AddLog = (props) => {
-	const { user } = props
+	const { user, setUserLogs, userLogs, submitted, setSubmitted } = props
 
 	const [query, setQuery] = useState("")
 	const [results, setResults] = useState(null)
@@ -83,6 +83,10 @@ const AddLog = (props) => {
 				onChange={handleReviewChange}
 				userThoughts={review}
 				user={user}
+				setUserLogs={setUserLogs}
+				userLogs={userLogs}
+				submitted={submitted}
+				setSubmitted={setSubmitted}
 			/>
 		)
 	}

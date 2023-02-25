@@ -1,5 +1,5 @@
 import "./index.css"
-import { useState, Fragment, useEffect } from "react"
+import { useState, Fragment, useEffect, useCallback } from "react"
 import { Route, Routes } from "react-router"
 import { v4 as uuid } from "uuid"
 import { getMyLogs, getLogs } from "./api/logs"
@@ -9,8 +9,8 @@ import SignIn from "./components/auth/SignIn"
 import Home from "./pages/Home"
 import SignUp from "./components/auth/SignUp"
 import ChangePassword from "./components/auth/ChangePassword"
-import UserLogs from "./components/UserLogs"
-import AddLog from "./components/AddLog"
+import UserLogs from "./pages/UserLogs"
+import AddLog from "./pages/AddLog"
 import ReviewPage from "./components/ReviewPage"
 import ReviewDetail from "./components/ReviewDetail"
 
@@ -18,18 +18,20 @@ const App = () => {
 	const [user, setUser] = useState(null)
 	const [userLogs, setUserLogs] = useState(null)
 	const [allLogs, setAllLogs] = useState(null)
+	const [submitted, setSubmitted] = useState(0)
 
 	useEffect(() => {
 		if (user !== null) {
 			getMyLogs(user).then((res) => {
-				setUserLogs(res.data.logs.reverse())})
-				getLogs(user).then((res) => {
-					setAllLogs(res.data.logs)
-				})
+				setUserLogs(res.data.logs.reverse())
+			})
+			getLogs(user).then((res) => {
+				setAllLogs(res.data.logs.reverse())
+			})
 		}
-		console.log(userLogs, "in app")
-		console.log(allLogs, "in app")
-	}, [user])
+		console.log(userLogs, "user logs in app")
+		console.log(allLogs, "all logs in app")
+	}, [user, submitted])
 
 	return (
 		<Fragment>
@@ -41,7 +43,11 @@ const App = () => {
 					path="/user"
 					element={
 						<RequireAuth user={user}>
-							<Home user={user} />
+							<Home
+								user={user}
+								userLogs={userLogs}
+								logs={allLogs}
+							/>
 						</RequireAuth>
 					}
 				/>
@@ -65,7 +71,13 @@ const App = () => {
 					path="/search"
 					element={
 						<RequireAuth user={user}>
-							<AddLog user={user} />
+							<AddLog
+								user={user}
+								setUserLogs={setUserLogs}
+								userLogs={userLogs}
+								submitted={submitted}
+								setSubmitted={setSubmitted}
+							/>
 						</RequireAuth>
 					}
 				/>

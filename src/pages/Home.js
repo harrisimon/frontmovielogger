@@ -7,18 +7,19 @@ import { Link } from "react-router-dom"
 
 //look into pagination
 const Home = (props) => {
-	const [logs, setLogs] = useState(null)
+	// const [logs, setLogs] = useState(null)
+	const {userLogs, logs} = props
 
-	useEffect(() => {
-		getLogs(props.user).then((res) => {
-			setLogs(res.data.logs)
-			// console.log("the res", res.data.logs)
-		})
+	// useEffect(() => {
+	// 	getLogs(props.user).then((res) => {
+	// 		setLogs(res.data.logs)
+	// 		// console.log("the res", res.data.logs)
+	// 	})
 		
-	}, [])
+	// }, [])
 	let renderedLogs
 	if (logs) {
-		renderedLogs = logs.reverse().map((log) => {
+		renderedLogs = logs.map((log) => {
 			return (
 				<MovieCard
 					key={log._id}

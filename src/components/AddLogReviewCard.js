@@ -4,9 +4,9 @@ import { addLog } from "../api/logs"
 import { useNavigate } from "react-router"
 
 const AddLogReviewCard = (props) => {
-	const { log, onChange, userThoughts, user } = props
+	const { log, onChange, userThoughts, user, setUserLogs, userLogs, submitted, setSubmitted } = props
 	const navigate = useNavigate()
-	
+	console.log(userLogs, "in add")
 
 	const review = {
 		userThoughts: userThoughts,
@@ -20,10 +20,12 @@ const AddLogReviewCard = (props) => {
 		actors: log.Actors.split(", ")
 	}
 	const handleSubmit = (e, user, review) => {
+		let update
 		e.preventDefault()
 		console.log("the review", review)
 		addLog(user, review)
-			.then(console.log("added"))
+			// .then(console.log("added"))
+			.then(setSubmitted(submitted + 1))
 			.then(navigate('/user'))
 			.catch((err) => console.log(err))
 
