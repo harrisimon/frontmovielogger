@@ -24,7 +24,6 @@ const AddLogReviewCard = (props) => {
 		e.preventDefault()
 		console.log("the review", review)
 		addLog(user, review)
-			// .then(console.log("added"))
 			.then(setSubmitted(submitted + 1))
 			.then(navigate('/user'))
 			.catch((err) => console.log(err))

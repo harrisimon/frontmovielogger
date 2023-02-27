@@ -42,3 +42,13 @@ export const getLog = (user, id) => {
 		},
 	})
 }
+
+export const deleteLog = (user, id) => {
+	return axios({
+		method: 'DELETE',
+		url: apiUrl + '/reviews/' + id,
+		headers: {
+			Authorization: `Token token=${user.token}`,
+		},
+	})
+}

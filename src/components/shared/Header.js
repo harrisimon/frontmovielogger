@@ -13,23 +13,23 @@ const linkStyle = {
 }
 const authenticatedOptions = (
 	<>
-		<LinkContainer to="/user" style={linkStyle}>
-			<Nav.Link>My Page</Nav.Link>
+		<LinkContainer to="/my-logs" style={linkStyle}>
+			<Nav.Link>My Logs</Nav.Link>
 		</LinkContainer>
 		<LinkContainer to="/search" style={linkStyle}>
 			<Nav.Link>Add Log</Nav.Link>
 		</LinkContainer>
 		<NavDropdown bg="dark" title="User" menuVariant="dark">
-			<NavDropdown.Item>
-				<LinkContainer to="/change-password" style={linkStyle}>
-					<Link>Change Password</Link>
-				</LinkContainer>
-			</NavDropdown.Item>
-			<NavDropdown.Item>
-				<LinkContainer to="sign-out" style={linkStyle}>
-					<Link>Sign Out</Link>
-				</LinkContainer>
-			</NavDropdown.Item>
+			<LinkContainer to="/change-password" style={linkStyle}>
+				<NavDropdown.Item >
+					<Link style={linkStyle}>Change Password</Link>
+				</NavDropdown.Item>
+			</LinkContainer>
+			<LinkContainer to="sign-out" style={linkStyle}>
+				<NavDropdown.Item>
+					<Link style={linkStyle}>Sign Out</Link>
+				</NavDropdown.Item>
+			</LinkContainer>
 		</NavDropdown>
 	</>
 )

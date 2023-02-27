@@ -12,13 +12,15 @@ import ChangePassword from "./components/auth/ChangePassword"
 import UserLogs from "./pages/UserLogs"
 import AddLog from "./pages/AddLog"
 import ReviewPage from "./components/ReviewPage"
-import ReviewDetail from "./components/ReviewDetail"
+import ReviewDetailPage from "./pages/ReviewDetailPage"
 
 const App = () => {
 	const [user, setUser] = useState(null)
 	const [userLogs, setUserLogs] = useState(null)
 	const [allLogs, setAllLogs] = useState(null)
 	const [submitted, setSubmitted] = useState(0)
+
+	const doc = 'doccy'
 
 	useEffect(() => {
 		if (user !== null) {
@@ -47,6 +49,8 @@ const App = () => {
 								user={user}
 								userLogs={userLogs}
 								logs={allLogs}
+								submitted={submitted}
+								setSubmitted={setSubmitted}
 							/>
 						</RequireAuth>
 					}
@@ -85,7 +89,11 @@ const App = () => {
 					path="/reviews/:id"
 					element={
 						<RequireAuth user={user}>
-							<ReviewDetail user={user} />
+							<ReviewDetailPage
+								user={user}
+								submitted={submitted}
+								setSubmitted={setSubmitted}
+							/>
 						</RequireAuth>
 					}
 				/>
