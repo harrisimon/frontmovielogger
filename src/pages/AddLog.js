@@ -6,7 +6,7 @@ import { addLog } from "../api/logs"
 import axios from "axios"
 
 const AddLog = (props) => {
-	const { user, setUserLogs, userLogs, submitted, setSubmitted } = props
+	const { user, setUserLogs, userLogs, triggerRefresh } = props
 
 	const [query, setQuery] = useState("")
 	const [results, setResults] = useState(null)
@@ -85,8 +85,8 @@ const AddLog = (props) => {
 				user={user}
 				setUserLogs={setUserLogs}
 				userLogs={userLogs}
-				submitted={submitted}
-				setSubmitted={setSubmitted}
+				fetch={fetch}
+				triggerRefresh={triggerRefresh}
 			/>
 		)
 	}

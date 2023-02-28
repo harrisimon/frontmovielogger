@@ -18,9 +18,9 @@ const App = () => {
 	const [user, setUser] = useState(null)
 	const [userLogs, setUserLogs] = useState(null)
 	const [allLogs, setAllLogs] = useState(null)
-	const [submitted, setSubmitted] = useState(0)
+	const [fetch, setFetch] = useState(false)
 
-	const doc = 'doccy'
+	const doc = "doccy"
 
 	useEffect(() => {
 		if (user !== null) {
@@ -33,7 +33,7 @@ const App = () => {
 		}
 		console.log(userLogs, "user logs in app")
 		console.log(allLogs, "all logs in app")
-	}, [user, submitted])
+	}, [user, fetch])
 
 	return (
 		<Fragment>
@@ -49,8 +49,8 @@ const App = () => {
 								user={user}
 								userLogs={userLogs}
 								logs={allLogs}
-								submitted={submitted}
-								setSubmitted={setSubmitted}
+								fetch={fetch}
+								triggerRefresh={() => setFetch(prev => !prev)}
 							/>
 						</RequireAuth>
 					}
@@ -79,8 +79,7 @@ const App = () => {
 								user={user}
 								setUserLogs={setUserLogs}
 								userLogs={userLogs}
-								submitted={submitted}
-								setSubmitted={setSubmitted}
+								triggerRefresh={() => setFetch(prev => !prev)}
 							/>
 						</RequireAuth>
 					}
@@ -91,8 +90,7 @@ const App = () => {
 						<RequireAuth user={user}>
 							<ReviewDetailPage
 								user={user}
-								submitted={submitted}
-								setSubmitted={setSubmitted}
+								triggerRefresh={() => setFetch(prev => !prev)}
 							/>
 						</RequireAuth>
 					}

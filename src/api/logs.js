@@ -22,7 +22,6 @@ export const getMyLogs = (user) => {
 }
 
 export const addLog = (user, review) => {
-	// console.log(log)
 	return axios({
 		method: "POST",
 		url: apiUrl + "/reviews",
@@ -45,8 +44,29 @@ export const getLog = (user, id) => {
 
 export const deleteLog = (user, id) => {
 	return axios({
+		method: "DELETE",
+		url: apiUrl + "/reviews/" + id,
+		headers: {
+			Authorization: `Token token=${user.token}`,
+		},
+	})
+}
+
+export const addComment = (user, id, comment) => {
+	return axios({
+		method: "POST",
+		url: apiUrl + "/comments/" + id,
+		data: { note: comment },
+		headers: {
+			Authorization: `Token token=${user.token}`,
+		},
+	})
+}
+
+export const deleteComment = (user, id, commentId) => {
+	return axios({
 		method: 'DELETE',
-		url: apiUrl + '/reviews/' + id,
+		url: `${apiUrl}/comments/${id}/${commentId}`,
 		headers: {
 			Authorization: `Token token=${user.token}`,
 		},

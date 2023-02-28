@@ -4,7 +4,15 @@ import { addLog } from "../api/logs"
 import { useNavigate } from "react-router"
 
 const AddLogReviewCard = (props) => {
-	const { log, onChange, userThoughts, user, setUserLogs, userLogs, submitted, setSubmitted } = props
+	const {
+		log,
+		onChange,
+		userThoughts,
+		user,
+		setUserLogs,
+		userLogs,
+		triggerRefresh
+	} = props
 	const navigate = useNavigate()
 	console.log(userLogs, "in add")
 
@@ -17,17 +25,16 @@ const AddLogReviewCard = (props) => {
 		director: log.Director.split(","),
 		genre: log.Genre.split(", "),
 		plot: log.Plot,
-		actors: log.Actors.split(", ")
+		actors: log.Actors.split(", "),
 	}
 	const handleSubmit = (e, user, review) => {
 		let update
 		e.preventDefault()
 		console.log("the review", review)
 		addLog(user, review)
-			.then(setSubmitted(submitted + 1))
-			.then(navigate('/user'))
+			.then(()=>triggerRefresh())
+			.then(navigate("/user"))
 			.catch((err) => console.log(err))
-
 	}
 	return (
 		<Container>
