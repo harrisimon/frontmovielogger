@@ -1,12 +1,20 @@
 import { useState, useEffect } from "react"
 import { getLog } from "../api/logs"
 import { useParams, useNavigate } from "react-router"
-import { Container, Row, Card, Button, Form, Col } from "react-bootstrap"
+import {
+	Container,
+	Row,
+	Card,
+	Button,
+	Form,
+	Col,
+	Spinner,
+	InputGroup,
+} from "react-bootstrap"
 import { deleteLog, addComment } from "../api/logs"
 import Comment from "../components/Comment"
 
 const ReviewDetail = (props) => {
-
 	const [log, setLog] = useState(null)
 	const [comment, setComment] = useState("")
 	const [updatedLog, setUpdatedLog] = useState(false)
@@ -17,10 +25,10 @@ const ReviewDetail = (props) => {
 	useEffect(() => {
 		getLog(user, id)
 			.then((res) => {
-				console.log("newest",res.data.log.comments)
+				// console.log("newest", res.data.log.comments)
 				setLog(res.data.log)
 			})
-			
+
 			.catch((error) => console.log(error))
 	}, [updatedLog])
 
@@ -40,14 +48,13 @@ const ReviewDetail = (props) => {
 			.then(setComment(""))
 			.then(() => setUpdatedLog((prev) => !prev))
 	}
-	
 
 	let card
 	let remove
 	let comments
 
 	if (log !== null) {
-		// console.log(log)
+	
 		if (user._id === log.author._id) {
 			remove = (
 				<Button variant="danger" onClick={deleteReview}>
@@ -56,7 +63,7 @@ const ReviewDetail = (props) => {
 			)
 		}
 		card = (
-			<Card style={{ width: "25rem" }} key={log.id}>
+			<Card style={{ width: "20rem", display:'flex' }} className='mb-2' key={log.id}>
 				<Card.Header>
 					<Card.Title>
 						{log.movieTitle} ({log.releaseYear})<br />
@@ -71,6 +78,7 @@ const ReviewDetail = (props) => {
 		)
 		// console.log("the log", log)
 		comments = log.comments.map((comment, index) => {
+			// console.log(comment)
 			return (
 				<Comment
 					key={index}
@@ -83,7 +91,17 @@ const ReviewDetail = (props) => {
 		})
 	}
 	if (!log) {
-		return <div>loading...</div>
+		return (
+			<Container>
+				<Row>
+					<Col>
+						<Spinner animation="border" role="status">
+							<span className="visually-hidden">Loading...</span>
+						</Spinner>
+					</Col>
+				</Row>
+			</Container>
+		)
 	}
 
 	return (
@@ -93,13 +111,22 @@ const ReviewDetail = (props) => {
 				<Col>
 					<h3>Comments</h3>
 					<Form onSubmit={postComment}>
-						<Form.Control
-							type="textarea"
-							placeholder="Add a comment..."
-							value={comment}
-							onChange={handleChange}
-						></Form.Control>
-						<Button onClick={postComment}>Post</Button>
+						<Form.Group>
+							<InputGroup>
+								<Form.Control
+									placeholder="Add a comment..."
+									onChange={handleChange}
+									value={comment}
+									as="textarea"
+									aria-label="With textarea"
+									maxLength={140}
+									style={{maxHeight:'8rem'}}
+								/>
+								<Button type="submit" onClick={postComment}>
+									Post
+								</Button>
+							</InputGroup>
+						</Form.Group>
 					</Form>
 					{comments}
 				</Col>

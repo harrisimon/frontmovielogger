@@ -14,28 +14,28 @@ const Recommendations = (props) => {
 	const { userLogs } = props
 	useEffect(() => {
 		let actors = {}
-		if (userLogs) {
+
+		if (userLogs !== null && userLogs.length > 4) {
 			userLogs.map((log) => {
 				log.actors.forEach(
 					(actor) => (actors[actor] = (actors[actor] || 0) + 1)
 				)
 			})
+			setActors(actors)
+			let mostWatched = Object.keys(actors).reduce((a, b) =>
+				actors[a] > actors[b] ? a : b
+			)
+			setActorFav(mostWatched)
+			let titles
+			let titleList = []
+			console.log(mostWatched)
+			console.log(actors)
+			getMoreByActor(mostWatched).then((res) => {
+				titles = res.data.results[0].known_for
+				titles.forEach((rec) => titleList.push(rec.title))
+				setRecommendation(titleList)
+			})
 		}
-		setActors(actors)
-		let mostWatched = Object.keys(actors).reduce((a, b) =>
-			actors[a] > actors[b] ? a : b
-		)
-		console.log("ue", mostWatched)
-		setActorFav(mostWatched)
-		let titles
-		let titleList = []
-		console.log(mostWatched)
-		console.log(actors)
-		getMoreByActor(mostWatched).then((res) => {
-			titles = res.data.results[0].known_for
-			titles.forEach((rec) => titleList.push(rec.title))
-			setRecommendation(titleList)
-		})
 	}, [userLogs])
 
 	let show

@@ -22,12 +22,12 @@ const authenticatedOptions = (
 		<NavDropdown bg="dark" title="User" menuVariant="dark">
 			<LinkContainer to="/change-password" style={linkStyle}>
 				<NavDropdown.Item >
-					<Link style={linkStyle}>Change Password</Link>
+					<Nav.Link style={linkStyle}>Change Password</Nav.Link>
 				</NavDropdown.Item>
 			</LinkContainer>
 			<LinkContainer to="sign-out" style={linkStyle}>
 				<NavDropdown.Item>
-					<Link style={linkStyle}>Sign Out</Link>
+					<Nav.Link style={linkStyle}>Sign Out</Nav.Link>
 				</NavDropdown.Item>
 			</LinkContainer>
 		</NavDropdown>
@@ -49,7 +49,7 @@ const alwaysOptions = <></>
 
 const Header = ({ user }) => {
 	return (
-		<Navbar bg="dark" variant="dark" expand="md">
+		<Navbar bg="dark" variant="dark" expand="md" style={{fontFamily:'Antonio'}}>
 			<Container>
 				<Navbar.Brand>
 					<Link to="/user" style={linkStyle}>

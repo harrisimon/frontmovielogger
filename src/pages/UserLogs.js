@@ -13,8 +13,10 @@ const UserLogs = (props) => {
 	const [recordsPerPage] = useState(5)
 
 	let renderedLogs
+	let recommendation
 
-	if (logs) {
+	if (logs !==null) {
+		recommendation = <Recommendations userLogs={logs} />
 		renderedLogs = logs.map((log) => {
 			return (
 				<MovieCard
@@ -28,12 +30,15 @@ const UserLogs = (props) => {
 				/>
 			)
 		})
+	} else {
+		renderedLogs = "loading"
+		recommendation = "loading"
 	}
 
 	return (
 		<Container>
-			<Recommendations userLogs={logs} />
 			<div>
+				{recommendation}
 				<Row>{renderedLogs}</Row>
 			</div>
 		</Container>

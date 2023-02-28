@@ -20,8 +20,6 @@ const App = () => {
 	const [allLogs, setAllLogs] = useState(null)
 	const [fetch, setFetch] = useState(false)
 
-	const doc = "doccy"
-
 	useEffect(() => {
 		if (user !== null) {
 			getMyLogs(user).then((res) => {
@@ -31,8 +29,8 @@ const App = () => {
 				setAllLogs(res.data.logs.reverse())
 			})
 		}
-		console.log(userLogs, "user logs in app")
-		console.log(allLogs, "all logs in app")
+		// console.log(userLogs, "user logs in app")
+		// console.log(allLogs, "all logs in app")
 	}, [user, fetch])
 
 	return (
@@ -50,7 +48,7 @@ const App = () => {
 								userLogs={userLogs}
 								logs={allLogs}
 								fetch={fetch}
-								triggerRefresh={() => setFetch(prev => !prev)}
+								triggerRefresh={() => setFetch((prev) => !prev)}
 							/>
 						</RequireAuth>
 					}
@@ -79,7 +77,7 @@ const App = () => {
 								user={user}
 								setUserLogs={setUserLogs}
 								userLogs={userLogs}
-								triggerRefresh={() => setFetch(prev => !prev)}
+								triggerRefresh={() => setFetch((prev) => !prev)}
 							/>
 						</RequireAuth>
 					}
@@ -90,7 +88,7 @@ const App = () => {
 						<RequireAuth user={user}>
 							<ReviewDetailPage
 								user={user}
-								triggerRefresh={() => setFetch(prev => !prev)}
+								triggerRefresh={() => setFetch((prev) => !prev)}
 							/>
 						</RequireAuth>
 					}
