@@ -14,7 +14,7 @@ const AddLogReviewCard = (props) => {
 		triggerRefresh
 	} = props
 	const navigate = useNavigate()
-	console.log(userLogs, "in add")
+	// console.log(userLogs, "in add")
 
 	const review = {
 		userThoughts: userThoughts,

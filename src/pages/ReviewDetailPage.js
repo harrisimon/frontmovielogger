@@ -54,16 +54,22 @@ const ReviewDetail = (props) => {
 	let comments
 
 	if (log !== null) {
-	
+		let date = new Date(log.createdAt)
+
+
 		if (user._id === log.author._id) {
 			remove = (
-				<Button variant="danger" onClick={deleteReview}>
+				<Button  variant="danger" onClick={deleteReview}>
 					Delete
 				</Button>
 			)
 		}
 		card = (
-			<Card style={{ width: "20rem", display:'flex' }} className='mb-2' key={log.id}>
+			<Card
+				style={{ width: "20rem", display: "flex" }}
+				className="mb-2"
+				key={log.id}
+			>
 				<Card.Header>
 					<Card.Title>
 						{log.movieTitle} ({log.releaseYear})<br />
@@ -73,12 +79,17 @@ const ReviewDetail = (props) => {
 				<Card.Img variant="left" src={`${log.poster}`}></Card.Img>
 				<Card.Body>{log.userThoughts}</Card.Body>
 				<Card.Body>{log.plot}</Card.Body>
-				<Card.Footer>{remove}</Card.Footer>
+				<Card.Footer>
+					<span ><small>Posted: {date.toLocaleString("en-us")}</small></span>
+					<div  className="d-flex justify-content-end">
+						{remove}
+						</div>
+				</Card.Footer>
 			</Card>
 		)
-		// console.log("the log", log)
+		
 		comments = log.comments.map((comment, index) => {
-			// console.log(comment)
+			
 			return (
 				<Comment
 					key={index}
@@ -120,7 +131,7 @@ const ReviewDetail = (props) => {
 									as="textarea"
 									aria-label="With textarea"
 									maxLength={140}
-									style={{maxHeight:'8rem'}}
+									style={{ maxHeight: "8rem" }}
 								/>
 								<Button type="submit" onClick={postComment}>
 									Post

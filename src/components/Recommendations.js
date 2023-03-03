@@ -42,7 +42,7 @@ const Recommendations = (props) => {
 	let recLine
 	if (recommendation !== null) {
 		show = recommendation.map((rec, index) => {
-			return <div key={index}>{rec}</div>
+			return <div key={index}><a href={`http://www.omdbapi.com/?apikey=764389f4&i&t=${rec}`}>{rec}</a>{rec}</div>
 		})
 	}
 	if (actorFav !== "") {
